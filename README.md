@@ -4,4 +4,4 @@
 * Most **importantly** I should be able to create *italics*
 <br> </br>
 * This is a [link](http://dillinger.io/) to a really great website that gives an elaborate example of markdown language
-* this is a [link](rebeccaminich.com) to my digital resume
+* this is a [link](rebeccaminich.com) to my homepage 
