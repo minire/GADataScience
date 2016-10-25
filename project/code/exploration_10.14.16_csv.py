@@ -61,28 +61,75 @@ path = "../data/"
 HDI = pd.read_csv(path + 'HDI_UN_2014.csv')   
 HDI.head()
 
+# rename country by to COUNTRY and make this the index 
+
+HDI['COUNTRY']  = HDI ['Country']
+HDI.drop(['Country', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9'], axis=1, inplace=True)
+indexed_HDI = HDI.set_index(['COUNTRY'])
+indexed_HDI.head()
+HDI.describe()
+
+# rename countries to match in HDI and MMR data frames for concatinating 
 
 
-#importing data for births attended by a health professional 
+
+# conactenating maternal mortality rate and human development index 
+MMR_HDI = pd.concat([indexed_MMR, indexed_HDI], axis=1)
+MMR_HDI = MMR_HDI.rename(columns = {'Numeric': 'Numeric_MMR', 'Low' : 'Low_MMR', 'High' : 'High_MMR'})
+MMR_HDI.dtypes
+
+#finding missing values 
+null_data = MMR_HDI[MMR_HDI.isnull().any(axis=1)]
+print null_data
+
+
+# basic statistics for human development index and maternal mortality rate 
+
+
+
+# searching for data on a specific country 
+MMR_HDI.head()
+for row in MMR_HDI.index:
+    if row == 'Albania':        
+
+MMR_HDI.loc['Rico']  
+
+
+
+#importing data for births attended by a health professional (DATA INCOMPLETE) 
 path = "../data/"
 professionalbirth = pd.read_csv(path + 'births attended by a health professional.csv')   
 professionalbirth.head()
+professionalbirth.describe()
 
 #Importing health outcomes data 
 path = "../data/"
 healthOutcomes = pd.read_csv(path + 'healthOutcomes_UN.csv')   
 healthOutcomes.head()
+healthOutcomes.describe()
 
 #importing national income and resources 
 path = "../data/"
 NationalIncome = pd.read_csv(path + 'National income and resources.csv')   
 NationalIncome.head()
+NationalIncome.describe()
+
+
 
 #Gender Inequality Index 
 path = "../data/"
 GII = pd.read_csv(path + 'GenderInequalityIndex_UN.csv')   
 GII.head()
 
-#
+#importing adolescent birth rate 
+path = "../data/"
+Adolbr = pd.read_csv(path + 'MDG_0000000003_adolescent birth rate.csv')
+adolbr.head()
 
 
+
+#importing aceess to abortion data 
+
+
+
+#importing violence against women data 
