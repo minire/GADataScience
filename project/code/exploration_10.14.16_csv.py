@@ -49,28 +49,26 @@ mat_mor15.describe()
 mat_mor15.sort('COUNTRY')
 mat_mor15.groupby('REGION').mean()
 
-indexed_MMR = mat_mor15.set_index(['COUNTRY']) 
-indexed_MMR.head()
 
+#indexing dataframe by country 
+indexed_MMR = mat_mor15.set_index(['COUNTRY']) 
 indexed_MMR.drop(['TYPE'], axis=1, inplace=True)
 indexed_MMR.head()
 indexed_MMR.describe()
+
 
 #importing Human development index data 
 path = "../data/"
 HDI = pd.read_csv(path + 'HDI_UN_2014.csv')   
 HDI.head()
 
-# rename country by to COUNTRY and make this the index 
 
+# rename country by to COUNTRY and make this the index 
 HDI['COUNTRY']  = HDI ['Country']
 HDI.drop(['Country', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9'], axis=1, inplace=True)
 indexed_HDI = HDI.set_index(['COUNTRY'])
 indexed_HDI.head()
 HDI.describe()
-
-# rename countries to match in HDI and MMR data frames for concatinating 
-
 
 
 # conactenating maternal mortality rate and human development index 
@@ -84,15 +82,20 @@ print null_data
 
 
 # basic statistics for human development index and maternal mortality rate 
+import seaborn as sns
 
+MMR_HDI['GNI'] = MMR_HDI['GNI'].convert_objects(convert_numeric=True)
+MMR_HDI.dtypes
+MMR_HDI = MMR_HDI.rename(columns = {'GNI': 'GNI_PPP'})
 
+# basic graphing of data 
+#heatmap
+sns.heatmap(MMR_HDI.corr())
+# scatter plot matrix (0=red, 1=green, 2=blue)
+pd.scatter_matrix(MMR_HDI, figsize=(10,10), s=10)
 
 # searching for data on a specific country 
-MMR_HDI.head()
-for row in MMR_HDI.index:
-    if row == 'Albania':        
-
-MMR_HDI.loc['Rico']  
+MMR_HDI.loc['Albania']  
 
 
 

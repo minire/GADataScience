@@ -9,7 +9,7 @@ import pandas as pd
 
 # creating two data frames to practice concating based on column string 
 
-df1 = pd.DataFrame({'A': ['A0', 'A1', 'A2', 'A3'], 'B': ['B0', 'B1', 'B2', 'B3'], 'C': ['C0', 'C1', 'C2', 'C3'], 'D': ['D0', 'D1', 'D2', 'D3']}, index=[0, 1, 2, 3])
+df1 = pd.DataFrame({'A': ['A0', 'A1', 'A2', 'A3','A4'], 'B': ['B0', 'B1', 'B2', 'B3','B4'], 'C': ['C0', 'C1', 'C2', 'C3','C4'], 'D': ['D0', 'D1', 'D2', 'D3', 'D4']}, index=[0, 1, 2, 3, 4])
 df1
 
 
@@ -32,7 +32,7 @@ yelp['wordiness'] = [len(x) for x in yelp['text']]
 
 
 # defining a scale of 'wordiness' using a list function and list comprehension 
-def concat(country):
+def words(text):
     if len(text) >= 2000:
         return 5 
     elif len(text) >= 1000:

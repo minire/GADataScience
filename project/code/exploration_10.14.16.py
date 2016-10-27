@@ -20,7 +20,7 @@ import json
 # http://apps.who.int/gho/athena/api/
 
     
-A = requests.get('http://apps.who.int/gho/athena/api/GHO/MDG_0000000003.json?profile=simple')
+A = requests.get('http://apps.who.int/gho/athena/api/GHO/MDG_0000000003.json?')
 A = [json.loads(row) for row in A]
 
 A.status_code
