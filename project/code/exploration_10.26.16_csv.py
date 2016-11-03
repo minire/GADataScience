@@ -7,7 +7,7 @@ CLASS: Getting Maternal Mortality rates form WHO- GHO
 # Link to the global health observatory API description page
 #http://apps.who.int/gho/data/node.resources.api
 
-# Look through the API description links and examples to see what use you have avaialble
+# Look through the API description links and examples to see what use you have avaialble 
 
 
 
