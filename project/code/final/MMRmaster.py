@@ -9,69 +9,107 @@ import json
 import pickle 
 
 # In[ ]:
-#creating a dataframe for maternal mortality rates by country from the WHO data set 'MDG_0000000026'
+# A. creating a dataframe for maternal mortality rates by country from the WHO data set 'MDG_0000000026'
 # values are per 100,000 women 
 import MatMorRat
 MatMorR = MatMorRat.getMMR()
-indexed_MatMorR = MatMorR.set_index(['ISO'])
-print indexed_MatMorR.head()
+# Removing null values 
+MatMorR = MatMorR[MatMorR.ISO.notnull()] 
+# reseting the index to the ISO column  
+A = MatMorR.set_index(['ISO'])
+A.describe()
 
-
-    # In[42]:
-# Creating a dataframe for the adolescent birth rates by country from the WHO data set 'MDG_0000000003'
+# In[42]:
+# B. Creating a dataframe for the adolescent birth rates by country from the WHO data set 'MDG_0000000003'
 # values are per 1000 women     
 import ABR
 AdolBR = ABR.getABR()
-indexed_AdolBR = AdolBR.set_index(['ISO'])
-print indexed_AdolBR.head()
-
+#removing null values 
+AdolBR = AdolBR[AdolBR.ISO.notnull()]
+#reseting the index to the ISO column 
+B = AdolBR.set_index(['ISO'])
+print B.describe()
 
 # In[ ]:
-
-# creating a dataframe for Abortion policy from CSV file. Data obtained from this PDF: https://www.reproductiverights.org/sites/crr.civicactions.net/files/documents/AbortionMap_Factsheet_2013.pdf
+# C. creating a dataframe for Abortion policy from CSV file. Data obtained from this PDF: https://www.reproductiverights.org/sites/crr.civicactions.net/files/documents/AbortionMap_Factsheet_2013.pdf
 # scale: 0 (abortion crimminalized, no abortions even to save the mothers life) to 6 (very few enforced restrictions during the entire length of the pregnancy)
 import AbortScale
 ABScale = AbortScale.getABS()
-indexed_ABScale = ABScale.set_index(['ISO'])
-print indexed_ABScale.head()
-
+# checking for null values
+null_data = ABScale[ABScale.isnull().any(axis=1)]
+print null_data
+#resetting the index to the ISO column 
+C = ABScale.set_index(['ISO'])
+print C.describe()
 
 # In[ ]:
-
-# Creating a data frame of life expextancy at birth in WHO countries from WHO data set 'WHOSIS_000001'
+# D. Creating a data frame of life expextancy at birth in WHO countries from WHO data set 'WHOSIS_000001'
 # age in years 
-
 import AOD
 LifeExpect = AOD.getAOD()
-indexed_LifeExpect = LifeExpect.set_index(['ISO'])
-print indexed_LifeExpect.head()
+# Removing null values 
+LifeExpect = LifeExpect[LifeExpect.ISO.notnull()] 
+#reseting the index to the ISO column 
+D = LifeExpect.set_index(['ISO'])
+print D.describe()
 
 # In[ ]:
-# Creating a data frame of Gross National Income (GNI) per capita based on purchasing power parity (PPP) in USD from WHO data set 'WHS9_93'
+# E. Creating a data frame of Gross National Income (GNI) per capita based on purchasing power parity (PPP) in USD from WHO data set 'WHS9_93'
 # age in years 
-
 import GNI
 GNI_PPP = GNI.getGNI()
-indexed_GNI_PPP = GNI_PPP.set_index(['ISO'])
-print indexed_GNI_PPP.head()
+# Removing null values 
+GNI_PPP = GNI_PPP[GNI_PPP.ISO.notnull()] 
+#reseting the index to the ISO Column 
+E = GNI_PPP.set_index(['ISO'])
+print E.describe()
 
+# In[ ]:
+# F. Net primary school enrollment as a percent of total by male and female 
+# shown as a percent of total 
+import prim
+PrimaryED = prim.getPrim()
+#removing null values 
+PrimaryED = PrimaryED[PrimaryED.ISO.notnull()]
+#reseting the index to the ISO column 
+F = PrimaryED.set_index(['ISO'])
+F[['EDFMLE_MLE','ED_FMLE','ED_MLE','EDYEARMLE']] = F[['EDFMLE_MLE','ED_FMLE','ED_MLE','EDYEARMLE']].astype(float)
+print F.describe()
 
-  # In[ ]:
-#Concating the data frame togwther using the ISO value 
-#FORMATTING IS WRONG FOR ABORTSCALE, Will have to figure out another way to add data
+# In[ ]:
+#Concating the data frame togwther using the ISO value
+#Creating a list of feature data frames 
+pieces = [A, B, D, E, F]
 
-mother = pd.concat([indexed_MatMorR, indexed_AdolBR, indexed_LifeExpect, indexed_GNI_PPP], axis=1, join = 'inner')
+# In[ ]:
+# concating features into one dataframe with MMR 
+mother = pd.concat(pieces, axis=1, join_axes=[B.index])
+mother.dtypes
+
+# In[ ]:
+# creating X and y 
+feature_cols = ['MMR%', 'ABR%', 'AOD_FMLE', 'GNI','Abortion_scale', 'EDFMLE_MLE']
 
 # scatter matrix of feature columns 
-pd.scatter_matrix(mother[['MMR%', 'ABR%', 'AOD_FMLE', 'GNI']], figsize=(10, 8))
+pd.scatter_matrix(mother[feature_cols], figsize=(10, 8))
 
 # heat map 
 import seaborn as sns 
-sns.heatmap(mother[['MMR%', 'ABR%', 'AOD_FMLE', 'GNI']].corr())
+sns.heatmap(mother[feature_cols].corr())
+
+
+
+mother = mother[mother.GNI.notnull()]
+mother = mother[mother.AOD_MLE.notnull()]
+mother = mother[mother.MMR100K.notnull()]
+null_data = mother[mother.isnull().any(axis=1)]
+print null_data
 # In[ ]:
+# Running a basic logistic regression using the MMRBinary variable
+#MMRBinary if '1' MMR is lower than the global average; if '0' MMR is higher than the global average 
 
 # define X and y
-feature_cols = ['ABR%', 'AOD_FMLE', 'GNI']
+feature_cols = ['ABR%', 'AOD_FMLE', 'GNI', 'Abortion_scale']
 X = mother[feature_cols]
 y = mother.MMRBinary
 
@@ -98,6 +136,10 @@ print metrics.accuracy_score(y_test, y_pred_class)
 
 
 
+ # In[ ]:
+#Importing the Country and ISO codes from WHO ABR data
+'''with open('CountryISO.txt', 'rb') as handle:
+    country = pickle.loads(handle.read())'''
 
 
 

@@ -10,10 +10,10 @@ def getMMR():
     
     # grabbing data for Maternal Mortality Rate (MMR) 'MDG_0000000026' 
     # Values are per 100K births         
-    C = requests.get('http://apps.who.int/gho/athena/api/GHO/MDG_0000000026.json')
+    A = requests.get('http://apps.who.int/gho/athena/api/GHO/MDG_0000000026.json')
     
     #Converting data into json format
-    data = C.json()
+    data = A.json()
     
     #Step1: Creating a data frane that contains the MMR (per 100,000 births) values 
     fact = data['fact']
@@ -93,9 +93,10 @@ def getMMR():
     MMR['MMR%'] = MMR['MMR100K']/100000
     
     # creating a binary variable for MMR 
-    MMR['MMRBinary'] = np.where(MMR.MMR100K <= 56, 1 , 0)
-    MMR.head()
-    
+    MMR['MMRBinary'] = np.where(MMR['MMR100K'] <= 56, 1 , 0)
+   
+
+   
     '''# compare with histogram and box plot by region
     import matplotlib.pyplot as plt
     # display plots in the notebook
