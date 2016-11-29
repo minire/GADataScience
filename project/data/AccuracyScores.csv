@@ -1,0 +1,4 @@
+Model ,Null  ,Log Reg ,Log Reg (Selection),Ran For,Ran For (Selection) 
+MMRBinary ,0.526316,0.873684211,0.857894737,0.8895,0.8947
+MMRClassifier,0.268421,0.692464986,0.674336644,0.7558,0.7482
+MMR100K (oob),0.052632,NaN,NaN,0.815,0.8348

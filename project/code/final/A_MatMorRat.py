@@ -79,7 +79,7 @@ def getMMR():
                 return country[b]
                 
     MMRfact['COUNTRY'] = [name(a) for a in MMRfact['ISO']]'''
-
+    
     # Renaming the data frame     
     MMR = MMRfact
     #MMR.dtypes
@@ -93,6 +93,24 @@ def getMMR():
     
     # Creating a binary variable for MMR 
     MMR['MMRBinary'] = np.where(MMR['MMR100K'] <= 56, 1 , 0)
+    
+    
+    # Creating a classfier variable for MMR based on quartile percents (min, 25%, 50%, 75%, Max)    
+    
+    def classifier(x):
+        if x > 229:
+            return 4 
+        elif x > 56:
+            return 3
+        elif x > 15:
+            return 2
+        elif x > 3:
+            return 1
+        else:
+            return 0
+        
+    MMR['MMRClassifier'] = [classifier(row) for row in MMR['MMR100K']]
+    
      
     '''# compare with histogram and box plot by region
     import matplotlib.pyplot as plt

@@ -181,7 +181,7 @@ print features
 # In[ ]:
 
 # Defining X and y 
-feature_cols = ['Abortion_scale', 'GNI', 'cell_Subscription%', 'contraceptives%', 'homicide100K'] # 'EDFMLE_MLE%', 'attend%', 'prenat%', 'AOD_FMLE', 'ABR%', 'AOD_MLE', 'AOD_BTSX', 'ED_FMLE%', 'ED_MLE%']
+feature_cols = ['Abortion_scale', 'GNI', 'cell_Subscription%', 'contraceptives%', 'homicide100K, EDFMLE_MLE%', 'attend%', 'prenat%', 'AOD_FMLE', 'ABR%', 'AOD_MLE', 'AOD_BTSX', 'ED_FMLE%', 'ED_MLE%']
 
 # define X and y
 X = mother[feature_cols]
@@ -193,18 +193,6 @@ from sklearn import metrics
 from sklearn.cross_validation import cross_val_score
 from sklearn.ensemble import RandomForestRegressor 
 rfreg = RandomForestRegressor()
-
-# train/test split
-from sklearn.cross_validation import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=123)
-
-# make predictions for testing set
-y_pred_class = logreg.predict(X_test)
-
-# calculate testing accuracy
-from sklearn import metrics
-print metrics.accuracy_score(y_test, y_pred_class)
-
 
 # In[ ]:
 # tuning n-estimators 
