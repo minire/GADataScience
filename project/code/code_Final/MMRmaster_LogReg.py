@@ -237,14 +237,15 @@ for cols in ys:
 
 # In[ ]:
 # Visualizing X and y 
-#data_cols = ['MMR%','ABR%', 'AOD_FMLE', 'GNI','Abortion_scale', 'EDFMLE_MLE', 'cell_Subscription']
+#data_cols = ['AOD_FMLE', 'attend%', 'GNI', 'ABR%', 'EDFMLE_MLE%', 'cell_Subscription%']
 
-# scatter matrix of feature columns 
-#pd.scatter_matrix(mother[feature_cols], figsize=(10, 8))
+#scatter matrix of feature columns 
+#pd.scatter_matrix(mother[data_cols], figsize=(10, 8))
 
-# heat map 
+# In[ ]:
+#heat map 
 #import seaborn as sns 
-#sns.heatmap(mother[feature_cols].corr())
+#sns.heatmap(mother[data_cols].corr())
 
 # In[ ]:
 # building a features list from the mother dataframe
