@@ -312,4 +312,22 @@ scores = cross_val_score(rfreg, X, y, cv=10, scoring='mean_squared_error')
 np.mean(np.sqrt(-scores))
 
 
+# In[ ]:
+# Check the RMSE for a Random Forest ALL features
+rfreg = RandomForestRegressor(n_estimators=130, max_features=3, random_state=1)
+scores = cross_val_score(rfreg, X, y, cv=10, scoring='mean_squared_error')
+np.mean(np.sqrt(-scores))
 
+# In[ ]:
+
+# Null accuracy RMSE
+def fillmean(x):
+    if x != str:
+        return mother['MMR100K'].mean()
+mother['MMRmean'] = [fillmean(row) for row in mother['MMR100K']]
+
+
+from sklearn.metrics import mean_squared_error
+score = mean_squared_error(mother['MMR100K'], mother['MMRmean'])
+nullRMSE = np.mean(np.sqrt(score))
+print nullRMSE 
