@@ -15,7 +15,7 @@ import A_MatMorRat
 MatMorR = A_MatMorRat.getMMR()
 # Removing null values 
 MatMorR = MatMorR[MatMorR.ISO.notnull()] 
-# reseting the index to the ISO column  
+# Reseting the index to the ISO column  
 A = MatMorR.set_index(['ISO'])
 A.describe()
 
@@ -25,9 +25,9 @@ A.describe()
 
 import B_ABR
 AdolBR = B_ABR.getABR()
-#removing null values 
+# Removing null values 
 AdolBR = AdolBR[AdolBR.ISO.notnull()]
-#reseting the index to the ISO column 
+# Reseting the index to the ISO column 
 B = AdolBR.set_index(['ISO'])
 print B.describe()
 
@@ -45,11 +45,11 @@ print B.describe()
 import C_AbortScale
 ABScale = C_AbortScale.getABS()
 
-# checking for null values
+# Checking for null values
 null_data = ABScale[ABScale.isnull().any(axis=1)]
 print null_data
 
-#resetting the index to the ISO column 
+# Resetting the index to the ISO column 
 C = ABScale.set_index(['ISO'])
 C.drop(['CNTRY'], axis=1, inplace=True)
 print C.describe()
@@ -62,7 +62,7 @@ import D_LifeExpect
 LifeExpect = D_LifeExpect.getAOD()
 # Removing null values 
 LifeExpect = LifeExpect[LifeExpect.ISO.notnull()] 
-#reseting the index to the ISO column 
+# Reseting the index to the ISO column 
 D = LifeExpect.set_index(['ISO'])
 print D.describe()
 
@@ -74,7 +74,7 @@ import E_GNI
 GNI_PPP = E_GNI.getGNI()
 # Removing null values 
 GNI_PPP = GNI_PPP[GNI_PPP.ISO.notnull()] 
-#reseting the index to the ISO Column 
+# Reseting the index to the ISO Column 
 E = GNI_PPP.set_index(['ISO'])
 print E.describe()
 
@@ -84,9 +84,9 @@ print E.describe()
 
 import F_prim
 PrimaryED = F_prim.getPrim()
-#removing null values 
+# Removing null values 
 PrimaryED = PrimaryED[PrimaryED.ISO.notnull()]
-#reseting the index to the ISO column 
+# Reseting the index to the ISO column 
 F = PrimaryED.set_index(['ISO'])
 #F[['EDFMLE_MLE','ED_FMLE','ED_MLE','EDYEARMLE']] = F[['EDFMLE_MLE','ED_FMLE','ED_MLE','EDYEARMLE']].astype(float)
 print F.describe()
@@ -96,9 +96,9 @@ print F.describe()
 
 import G_cell
 cellphones = G_cell.getCell()
-#removing null values 
+# Removing null values 
 cellphones = cellphones[cellphones.ISO.notnull()]
-#reseting the index to the ISO column 
+# Reseting the index to the ISO column 
 G = cellphones.set_index(['ISO'])
 
 print G.describe()
@@ -108,9 +108,9 @@ print G.describe()
 
 import H_cpmo
 contraceptives = H_cpmo.getcontra()
-#removing null values 
+# Removing null values 
 contraceptives = contraceptives[contraceptives.ISO.notnull()]
-#reseting the index to the ISO column 
+# Reseting the index to the ISO column 
 H = contraceptives.set_index(['ISO'])
 
 print H.describe()
@@ -121,9 +121,9 @@ print H.describe()
 
 import I_attend
 attend = I_attend.getattend()
-#removing null values 
+# Removing null values 
 attend = attend[attend.ISO.notnull()]
-#reseting the index to the ISO column 
+# Reseting the index to the ISO column 
 I = attend.set_index(['ISO'])
 
 print I.describe()
@@ -133,9 +133,9 @@ print I.describe()
 
 import J_prenatal
 prenatal = J_prenatal.getPrenat()
-#removing null values 
+# Removing null values 
 prenatal = prenatal[prenatal.ISO.notnull()]
-#reseting the index to the ISO column 
+# Reseting the index to the ISO column 
 J = prenatal.set_index(['ISO'])
 
 print J.describe()
@@ -146,25 +146,25 @@ print J.describe()
 
 import K_homicide
 homicide = K_homicide.gethomicide()
-#removing null values 
+# Removing null values 
 homicide = homicide[homicide.ISO.notnull()]
-#reseting the index to the ISO column 
+# Reseting the index to the ISO column 
 K = homicide.set_index(['ISO'])
 
 print K.describe()
 
 # In[ ]:
-#Concating the data frame togwther using the ISO value
-#Creating a list of feature data frames 
+# Concating the data frame togwther using the ISO value
+# Creating a list of feature data frames 
 pieces = [A, B, C, D, E, F, G, H, I, J, K]
 
-# concating features into one dataframe with MMR 
+# Concating features into one dataframe with MMR 
 mother = pd.concat(pieces, axis=1, join_axes=[C.index])
 
  # In[ ]: 
-#filling missing values for contraceptive usage 
+# Filling missing values for contraceptive usage 
 
-#creating a contraceptive median feature 
+# Creating a contraceptive median feature 
 def classifier(x):
     if x == 'AFR':
         return 23.36 
@@ -183,21 +183,19 @@ def classifier(x):
 
 mother['contraRegMed'] = [classifier(row) for row in mother['REGION']]
 
-#creating multiple contraceptive features to try in model
+# Creating multiple contraceptive features to try in model
 mother['contraRegFill'] = mother['contraceptives%']
-# filling missing contraceptive values with median values from WHO world region 
+# Filling missing contraceptive values with median values from WHO world region 
 mother['contraRegFill'].fillna(mother.contraRegMed, inplace=True)
-#filling missing contraceptive values with global median value 
+# Filling missing contraceptive values with global median value 
 mother['contraceptives%'].fillna(mother['contraceptives%'].median(), inplace=True)
-
-mother.dtypes
 
  # In[ ]:
 
-#filling remaining missing values 
+# Filling remaining missing values 
 mother.fillna(mother.median(), inplace=True)
 
-#checking for missing values 
+# Checking for missing values 
 null_data = mother[mother.isnull().any(axis=1)]
 print null_data
    
@@ -206,39 +204,39 @@ print null_data
 
 feature_cols = ['AOD_FMLE', 'attend%', 'GNI', 'ABR%', 'EDFMLE_MLE%', 'cell_Subscription%', 'homicide100K', 'contraceptives%', 'prenat%', 'ED_FMLE%' , 'Abortion_scale']
 
-# define X and y
+# Define X and y
 X = mother[feature_cols]
 ys = [mother['MMRBinary'], mother['MMRClassifier']]
 
 # In[ ]:
 
 for cols in ys:
-    # train/test split
+    # Train/test split
     from sklearn.cross_validation import train_test_split
     X_train, X_test, y_train, y_test = train_test_split(X, cols, random_state=123)
     
-    # train a logistic regression model
+    # Train a logistic regression model
     from sklearn.linear_model import LogisticRegression
     logreg = LogisticRegression(C=1e9)
     logreg.fit(X_train, y_train)
     
-    # make predictions for testing set
+    # Make predictions for testing set
     y_pred_class = logreg.predict(X_test)
     
-    # calculate testing accuracy
+    # Calculate testing accuracy
     from sklearn import metrics
     print metrics.accuracy_score(y_test, y_pred_class)
     
 
 # In[ ]:
-# cross validation accuracy
+# Cross validation accuracy
 for cols in ys:
     from sklearn.cross_validation import cross_val_score
     scores = cross_val_score(logreg, X, cols, cv=10, scoring='accuracy')
     print np.mean(scores)
 
 # In[ ]:
-# visualizing X and y 
+# Visualizing X and y 
 #data_cols = ['MMR%','ABR%', 'AOD_FMLE', 'GNI','Abortion_scale', 'EDFMLE_MLE', 'cell_Subscription']
 
 # scatter matrix of feature columns 

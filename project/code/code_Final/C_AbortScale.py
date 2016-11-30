@@ -19,7 +19,7 @@ import numpy as np
 def getABS():
 
     # C. Importing Abortion Scale CSV
-    path = "../final/"
+    path = "../code_final/"
     ABS = pd.read_csv(path + 'abortion_scale_final.csv')   
     #print ABS.head()   
     
