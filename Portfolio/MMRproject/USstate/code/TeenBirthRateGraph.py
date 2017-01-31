@@ -81,7 +81,7 @@ data = [ dict(
         #colorscale = scl,
         autocolorscale = False,
         locations = USMMR['code'],
-        z = USMMR['MMRClassifier'].astype(float),
+        z = USMMR['Teen Birth Rate per 1,000'].astype(float),
         locationmode = 'USA-states',
         text = False,
         marker = dict(
@@ -91,12 +91,12 @@ data = [ dict(
             )
         ),
         colorbar = dict(
-            title = "MMR Quartile (4- high, 1- low)"
+            title = "Teen Birth Rate per 1,000"
         )
     ) ]
 
 layout = dict(
-        title = 'U.S. Maternal Mortality Rates (MMR)',
+        title = 'Teen Birth Rate per 1,000',
         geo = dict(
             scope='usa',
             projection=dict( type='albers usa' ),
@@ -107,4 +107,4 @@ layout = dict(
 
 fig = dict(data=data, layout=layout)
 
-py.image.save_as(fig, filename='USMMR.png')
+py.image.save_as(fig, filename='TeenBirthRate.png')

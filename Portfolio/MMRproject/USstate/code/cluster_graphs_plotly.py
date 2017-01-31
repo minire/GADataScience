@@ -1,5 +1,5 @@
 
-import plotly as py
+import plotly.plotly as py
 import plotly.tools as tls
 tls.set_credentials_file(username='minire', api_key='nkch3Fjxld6ZPE70SKpN')
 import pandas as pd
@@ -18,7 +18,7 @@ import numpy as np
 6 (very few enforced restrictions during the entire length of the pregnancy)'''
 
 # US. Importing State MMR data from CSV
-path = "../USstate/"
+path = "../code/"
 USMMR = pd.read_csv(path + 'compiled_state_data.csv')   
 
 
@@ -55,7 +55,7 @@ USMMR.fillna(USMMR.median(), inplace=True)
 
 # Change index to state 
 USMMR = USMMR.set_index(['State'])
-USMMR.drop(['MMR_Rank', 'prop poverty_White ', 'Prop poverty_Black', 'prop poverty_Hispanic', 'Ambulatory_Abort', 'HospNear_Abort', 'TA_Abort', 'AdmitPriv_Abort', 'TP_White 1000', 'TP_Black 1000', 'TP_Hispanic 1000', ], axis=1, inplace=True)
+#USMMR.drop(['MMR_Rank', 'prop poverty_White ', 'Prop poverty_Black', 'prop poverty_Hispanic', 'Ambulatory_Abort', 'HospNear_Abort', 'TA_Abort', 'AdmitPriv_Abort', 'TP_White 1000', 'TP_Black 1000', 'TP_Hispanic 1000', ], axis=1, inplace=True)
 
 
 
@@ -85,12 +85,12 @@ USMMR = USMMR.set_index(['code'])
 
 
 # In[]: 
-import plotly as py
-py.offline.init_notebook_mode()
+
+#py.offline.init_notebook_mode()
 #help(py.offline.plot)
-from plotly.offline import plot 
-import plotly.graph_objs as go 
-help(py.graph_objs)
+#from plotly.offline import plot 
+#import plotly.graph_objs as go 
+#help(py.graph_objs)
 
 # In[]:
 
@@ -119,12 +119,8 @@ Multiple</a>',
 #The name of the geo_key is included in this section of the code 
 # the lat and longitudes here are for each individual graph (aka there are repeated lats and longs for each year)
 
-features = [
+features = ['MMR', 'MedianIncome($)', 'Medicaid_extend_Pregnancy', 'economic distress', 'Teen Birth Rate per 1,000', 'PPR_White', 'PPR non-white ', 'Abortion_Policy_rank', 'Pill_InsurePol', 'EC_access', 'State Taxes Per Capita', 'total exports']
 
-]
-
-for cols in USMMR:
-    features.append(cols)
 
 
 for i in range(len(features)):
@@ -200,7 +196,7 @@ for y in reversed(range(ROWS)):
 
 fig = { 'data':data, 'layout':layout }  
 
-py.offline.plot( fig, filename='US Maternal Mortality Rate and Contributing Demographics')    
+py.image.save_as(fig, filename='clustergraphMMR Dems.png')
 
 # In[]
 

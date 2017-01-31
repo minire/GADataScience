@@ -1,4 +1,3 @@
-
 import requests
 import pandas as pd 
 import json
@@ -79,128 +78,131 @@ print features
 #USMMR.head()
 #USMMR.dtypes
 
-# In[ ]:
-
+# In[]
 # Defining X and y 
-feature_cols = [ 'MedianIncome($)', 'Medicaid_extend_Pregnancy', 'economic distress', 'obesity in women (%)', 'Medicaid_Paid_births(%)', 'Teen Birth Rate per 1,000', 'PPR_White', 'PPR non-white ', 'Abortion_Policy_rank', 'Pill_InsurePol', 'EC_access', 'State Taxes Per Capita', 'total exports']
-
+feature_cols = [ 'MedianIncome($)', 'Medicaid_extend_Pregnancy', 'economic distress', 'Teen Birth Rate per 1,000', 'PPR_White', 'PPR non-white ', 'Abortion_Policy_rank', 'Pill_InsurePol', 'EC_access', 'State Taxes Per Capita', 'total exports']
+    
 # define X and y
 X = USMMR[feature_cols]
-y = USMMR['MMR']
+y = USMMR['MMRClassifier']
+​
+In [ ]:
 
 # In[ ] :
-# importing random forest regressor for continuous variable 
+# Importing random forest regressor for continuous variable 
 from sklearn import metrics 
 from sklearn.cross_validation import cross_val_score
-from sklearn.ensemble import RandomForestRegressor 
-rfreg = RandomForestRegressor()
+from sklearn.ensemble import BaggingRegressor
+from sklearn.ensemble import RandomForestClassifier
+rfreg = RandomForestClassifier()
+rfreg
+​
+import numpy as np
+​
+In [ ]:
 
+5
 # In[ ]:
-# tuning n-estimators 
-
-# list of values to try for n_estimators (the number of trees)
-estimator_range = range(10, 310, 10)
-
-# list to store the average RMSE for each value of n_estimators
-RMSE_scores = []
-
-# use 5-fold cross-validation with each value of n_estimators (WARNING: SLOW!)
+# Tuning n-estimators 
+# List of values to try for n_estimators (the number of trees)
+estimator_range = range(10, 510, 10)
+​
+# List to store the average RMSE for each value of n_estimators
+ACU_scores = []
+​
+# Use 5-fold cross-validation with each value of n_estimatorsimport numpy as np
+​
 for estimator in estimator_range:
-    rfreg = RandomForestRegressor(n_estimators=estimator, random_state=1)
-    MSE_scores = cross_val_score(rfreg, X, y, cv=5, scoring='mean_squared_error')
-    RMSE_scores.append(np.mean(np.sqrt(-MSE_scores)))
-
-# plot n_estimators (x-axis) versus RMSE (y-axis)
-
-import matplotlib.pyplot as plt
+    rfreg = RandomForestClassifier(n_estimators=estimator, random_state=1)
+    scores = cross_val_score(rfreg, X, y, cv=10, scoring='accuracy')
+    ACU_scores.append(np.mean(scores))
+    
+# In[ ]
+# Plot n_estimators (x-axis) versus RMSE (y-axis)
 %matplotlib inline
-
-plt.plot(estimator_range, RMSE_scores)
+import matplotlib.pyplot as plt
+​
+plt.plot(estimator_range, ACU_scores)
 plt.xlabel('n_estimators')
-plt.ylabel('RMSE (lower is better)')
-
-# show the best RMSE and the corresponding max_features
-sorted(zip(RMSE_scores, estimator_range))[0]
+plt.ylabel('ACU')
+​
+# Show the best ACU score and the corresponding max_features
+sorted(zip(ACU_scores, estimator_range),reverse=True)[0]
+In [ ]:
 
 # In[ ]:
 # Tuning max_features
-# list of values to try for max_features
+# List of values to try for max_features
 feature_range = range(1, len(feature_cols)+1)
-
-# list to store the average RMSE for each value of max_features
-RMSE_scores = []
-
-# use 10-fold cross-validation with each value of max_features (WARNING: SLOW!)
+​
+# List to store the average RMSE for each value of max_features
+ACU_scores = []
+​
+# Use 10-fold cross-validation with each value of max_features
 for feature in feature_range:
-    rfreg = RandomForestRegressor(n_estimators=130, max_features=feature, random_state=1)
-    MSE_scores = cross_val_score(rfreg, X, y, cv=10, scoring='mean_squared_error')
-    RMSE_scores.append(np.mean(np.sqrt(-MSE_scores)))
+    rfreg = RandomForestClassifier(n_estimators=30, max_features=feature, random_state=1)
+    scores = cross_val_score(rfreg, X, y, cv=10, scoring='accuracy')
+    ACU_scores.append(np.mean(scores))
     
-# plot max_features (x-axis) versus RMSE (y-axis)
-plt.plot(feature_range, RMSE_scores)
+# Plot max_features (x-axis) versus RMSE (y-axis)
+plt.plot(feature_range, ACU_scores)
 plt.xlabel('max_features')
-plt.ylabel('RMSE (lower is better)')  
+plt.ylabel('ACU')  
+​
+# Show the best ACU score and the corresponding max_features
+sorted(zip(ACU_scores, feature_range), reverse=True)[0]
+​
+In [ ]:
 
-# show the best RMSE and the corresponding max_features
-sorted(zip(RMSE_scores, feature_range))[0]
-
+,
 # In[ ]:
 # Fitting a Random Forest with the best parameters
-# Max_features=1 is best and n_estimators=40
-rfreg = RandomForestRegressor(n_estimators=130, max_features=4, oob_score=True, random_state=1)
+# Max_features=1 is best and n_estimators=30
+rfreg = RandomForestClassifier(n_estimators=30, max_features=3,oob_score=True, random_state=1)
 rfreg.fit(X, y)
-
-#compute feature importances 
+​
+# Compute feature importances 
 pd.DataFrame({'feature':feature_cols, 'importance':rfreg.feature_importances_}).sort_values('importance', ascending=False)
+5.4 C Model Evaluation - Random Forest Classifier
+In [ ]:
 
-# compute the out-of-bag R-squared score
-#rfreg.oob_score_
-# In[]:
-
-# Creating a new variable for optimized features 
+# Optimizing features 
 from sklearn.feature_selection import SelectFromModel
+sfm = SelectFromModel(rfreg,threshold=0.1, prefit=True)
+print(sfm.transform(X).shape[0],sfm.transform(X).shape[1])
+​
+sfm = SelectFromModel(rfreg, threshold='mean', prefit=True)
+print(sfm.transform(X).shape[0],sfm.transform(X).shape[1])
+​
+sfm = SelectFromModel(rfreg, threshold='median', prefit=True)
+print(sfm.transform(X).shape[0],sfm.transform(X).shape[1])
+​
+In [ ]:
+
+​
 sfm = SelectFromModel(rfreg, threshold=0.1, prefit=True)
 X_important = sfm.transform(X)
 print(X_important.shape[0],X_important.shape[1])
+In [ ]:
 
-# In[ ]:
-# Check the RMSE for a Random Forest that only includes important features
-rfreg = RandomForestRegressor(n_estimators=130, max_features=4, random_state=1)
-scores = cross_val_score(rfreg, X_important, y, cv=10, scoring='mean_squared_error')
-np.mean(np.sqrt(-scores))
+# Check the Accuracy Score for a Random Forest that only includes important features
+rfreg = RandomForestClassifier(n_estimators=30, max_features=3, random_state=1)
+scores = cross_val_score(rfreg, X_important, y, cv=10, scoring='accuracy')
+np.mean(scores)
+​
+In [ ]:
 
-# In[ ]:
-# Check the RMSE for a Random Forest ALL features
-rfreg = RandomForestRegressor(n_estimators=130, max_features=4, random_state=1)
-scores = cross_val_score(rfreg, X, y, cv=20, scoring='mean_squared_error')
-np.mean(np.sqrt(-scores))
+# check the Accuracy Score for a Random Forest that includes ALL features
+rfreg = RandomForestClassifier(n_estimators=30, max_features=3, random_state=1)
+scores = cross_val_score(rfreg, X, y, cv=10, scoring='accuracy')
+np.mean(scores)
+​
+In [ ]:
 
-
-# In[ ]:
-
-# Null accuracy RMSE
-def fillmean(x):
-    if x != str:
-        return USMMR['MMR'].mean()
-USMMR['MMRmean'] = [fillmean(row) for row in USMMR['MMR']]
-
-
-from sklearn.metrics import mean_squared_error
-score = mean_squared_error(USMMR['MMR'], USMMR['MMRmean'])
-nullRMSE = np.mean(np.sqrt(score))
-print nullRMSE 
-
-# In[ ]:
-
-# visualizing X and y 
-data_cols =['Medicaid_extend_Pregnancy', 'economic distress', 'Teen Birth Rate per 1,000', 'Abortion_Policy_rank', 'Pill_InsurePol', 'EC_access', 'State Taxes Per Capita', 'total exports'] #'obesity in women (%)', 'Medicaid_Paid_births(%)','MedianIncome($)'
-
-# scatter matrix of feature columns 
-pd.scatter_matrix(USMMR[data_cols], figsize=(20, 20))
-
-
-# In[ ]:
-#heat map 
-import seaborn as sns 
-sns.heatmap(USMMR[data_cols].corr())
+print 
+# Calculate the Null Accuracy Score 
+print 'Null Accuracy:' 
+null = USMMR.MMRClassifier.value_counts()/len(USMMR)
+print null.head(1) 
+​
 
