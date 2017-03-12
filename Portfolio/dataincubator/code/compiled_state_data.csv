@@ -1,0 +1,57 @@
+State,MMR,MMR_Rank,Median Annual Household Income,Clinic must meet structural standards comparable to ambulatory surgical centers,Maximum distance between clinics and hospital specified,Transfer agreement with hospital in event of complications required,Hospital admitting privileges or alternative agreements for clinicians required,State Has Secured a Waiver or State Plan Amendment (SPA) from CMS to Cover Services,economic distress,obesity in women (%),births financed by medicaid (%) (2010-2015),"Teen Birth Rate per 1,000",PPR_White,PPR non-white ,Abortion_Policy_rank,Contraceptives paid for by insurance,emergency contraceptive access,State Taxes Per Capita
+Alabama,11.6,33,44509,Yes,No,No,Yes,Yes,14,64.8,58,33.2,0.732114107,1.497502372,35,No Policy,No Policy,1916
+Alaska,3.2,4,75112,No,No,No,No,No,27,61.3,53,29.1,0.642021332,1.494351494,20,No Policy,Weak Policy,4605
+Arizona,7.5,11,52248,Yes,Yes,No,Yes,No,21,59.1,54,31.5,0.51068389,1.509288196,45,Limited Policy,No Policy,1944
+Arkansas,16,40,42798,Yes,Yes,No,No,No,33,65.9,67,41.5,0.766738233,1.663898876,39,Limited Policy,Weak Policy,3013
+California,12.5,35,63636,No,No,No,No,Yes,14,53.9,50,22.4,0.636481353,1.232413561,4,Limited Policy,Meets Policy,3558
+Colorado,10.9,29,66596,No,No,No,No,No,32,48.2,43,21.9,0.701808103,1.663717449,16,Meets Policy,Weak Policy,2195
+Connecticut,7.5,11,72889,Yes,No,No,No,Yes,17,53.7,47,12.2,0.704797211,1.688806508,13,Weak Policy,Limited Policy,4431
+Delaware,10.3,25,57756,No,No,No,No,No,22,61.4,48,22.7,0.725665809,1.467109568,15,Weak Policy,No Policy,3395
+District of Columbia,38.2,51,70071,No,No,No,No,No,29,51.8,46,30.3,0.264550265,1.431930797,N/A,No Policy,Limited Policy,N/A
+Florida,14.8,38,48825,Yes,No,No,Yes,Yes,6,58,50,23.6,0.667639386,1.39016246,25,No Policy,No Policy,1779
+Georgia,20.9,49,50768,No,No,No,No,Yes,40,59.4,54,29.5,0.516733416,1.523538799,28,Meets Policy,No Policy,1845
+Hawaii,13.9,37,64514,No,No,No,No,No,37,47.7,NaN,24.1,0.665105704,1.078555452,7,Limited Policy,Weak Policy,4250
+Idaho,15,39,51624,No,No,No,No,No,24,57.9,45,24.5,0.847789527,1.799104983,34,Weak Policy,No Policy,2246
+Illinois,7.8,13,60413,No,No,No,No,No,10,59.4,50,23.7,0.621147608,1.645072991,19,Meets Policy,Weak Policy,3042
+Indiana,2.9,3,51983,No,Yes,No,Yes,Yes,41,60.4,50,29.1,0.850696394,1.597214422,48,No Policy,No Policy,2554
+Iowa,8.2,15,60855,No,No,No,No,Yes,34,59,37,21,0.837828448,1.918972127,14,Meets Policy,No Policy,2662
+Kansas,7.1,9,54865,No,No,No,No,No,36,61.1,34,28.6,0.781485116,1.655544652,47,No Policy,No Policy,2526
+Kentucky,8.1,14,42387,Yes,No,Yes,No,No,51,61.7,46,37.4,0.874544508,1.710914454,32,Weak Policy,No Policy,2516
+Louisiana,17.9,44,45922,Yes,No,No,Yes,Yes,12,65.5,65,37.5,0.646000016,1.488857121,44,No Policy,No Policy,2085
+Maine,1.2,1,50756,No,No,No,No,Yes,50,61.5,43,16.9,0.968032566,1.323226278,12,Weak Policy,Weak Policy,2892
+Maryland,18.7,45,73594,Yes,No,No,No,Yes,10,60.8,44,18.6,0.625065365,1.374934635,11,Weak Policy,No Policy,3167
+Massachusetts,4.8,5,67861,No,No,No,No,No,48,50.6,41,11.3,0.646749887,1.955083639,23,Weak Policy,Meets Policy,3741
+Michigan,21,50,54203,Yes,Yes,Yes,No,No,47,60.4,46,22.3,0.731385735,1.850611838,31,No Policy,No Policy,2503
+Minnesota,5,6,68730,No,No,No,No,Yes,31,54.9,43,16.1,0.623562959,2.714879852,27,Weak Policy,Limited Policy,4238
+Mississippi,19,47,40037,Yes,Yes,No,Yes,Yes,44,65.9,64,40.3,0.705678337,1.374591207,40,No Policy,No Policy,2530
+Missouri,12.7,36,59196,Yes,Yes,No,No,Yes,16,59.7,42,28.6,0.711300568,2.154797727,43,Weak Policy,No Policy,1854
+Montana,10.1,23,51395,No,No,No,No,Yes,45,51.9,49,27.1,0.869605142,2.173553719,10,No Policy,No Policy,2594
+Nebraska,9,17,60474,Yes,No,Yes,No,No,25,60.2,35,23.6,0.637141648,2.36503856,41,No Policy,No Policy,2592
+Nevada,10,22,52008,No,No,No,No,No,1,57.8,64,29.4,0.631213255,1.368786745,18,Weak Policy,No Policy,2516
+New Hampshire,9.2,20,75675,No,No,No,No,Yes,46,54.7,27,11.8,0.861332491,2.402082594,6,Meets Policy,Weak Policy,1720
+New Jersey,16.5,41,68357,No,No,No,No,No,4,55.7,42,14,0.583151743,1.530534145,9,Weak Policy,Limited Policy,3321
+New Mexico,16.5,41,45119,No,No,No,No,Yes,2,59.5,72,40.5,0.514112118,1.29780225,8,Weak Policy,Meets Policy,2761
+New York,18.9,46,58005,No,No,No,No,Yes,27,53.4,51,16.9,0.671971395,1.452991883,5,Limited Policy,Limited Policy,3898
+North Carolina,10.9,29,50797,Yes,No,No,No,Yes,6,60.9,54,27.2,0.679585136,1.522782147,26,Limited Policy,No Policy,2353
+North Dakota,10.3,25,57415,No,Yes,No,No,No,19,57.4,33,24,0.803513572,2.113423093,38,Weak Policy,No Policy,8277
+Ohio,7.2,10,53301,Yes,Yes,Yes,No,No,26,61.5,52,26.1,0.694661804,2.148653212,37,Weak Policy,No Policy,2331
+Oklahoma,20.1,48,47077,Yes,No,No,Yes,Yes,5,64.3,60,40.7,0.696138902,1.564313468,50,Weak Policy,No Policy,2347
+Oregon,6.5,8,60834,No,No,No,No,Yes,18,57.6,50,20.8,0.828084777,1.489297173,1,Limited Policy,Limited Policy,2439
+Pennsylvania,10.1,23,60389,Yes,No,Yes,No,Yes,3,60,39,20.1,0.683849418,2.001143511,30,No Policy,Weak Policy,2674
+Rhode Island,5.2,7,55701,Yes,No,No,No,Yes,39,55.5,50,16.7,0.708389112,1.749856569,22,Weak Policy,No Policy,2811
+South Carolina,12,34,46360,Yes,No,No,Yes,Yes,9,62.4,60,30,0.622817864,1.670546019,46,No Policy,Weak Policy,1848
+South Dakota,9,17,55065,Yes,No,No,No,No,23,56.9,50,27.6,0.590198632,3.000794913,33,No Policy,No Policy,1885
+Tennessee,11,32,47330,Yes,Yes,Yes,No,No,37,64.6,54,33.8,0.875383336,1.336926535,24,No Policy,No Policy,1803
+Texas,10.5,28,56473,No,No,No,No,No,30,62.5,54,39.4,0.51088254,1.384306576,29,Weak Policy,No Policy,2050
+Utah,9.9,21,66258,Yes,Yes,No,No,No,8,51.5,31,20,0.830712475,1.721699447,49,No Policy,Limited Policy,2145
+Vermont,2.6,2,59494,No,No,No,No,No,48,53.1,42,14.4,0.956161214,1.686807654,3,Meets Policy,Weak Policy,4728
+Virginia,8.3,16,61486,Yes,No,Yes,No,Yes,42,58.1,31,19.3,0.687540732,1.509801963,42,Weak Policy,No Policy,2276
+Washington,9,17,67243,No,No,No,No,Yes,13,55.9,49,19.8,0.820414497,1.39972257,2,Meets Policy,Meets Policy,2754
+West Virginia,10.4,27,42824,No,No,No,No,No,19,64.8,48,38.3,0.959111973,1.543226648,21,Weak Policy,No Policy,2908
+Wisconsin,10.9,29,55425,No,No,Yes,No,Yes,42,58.9,64,18.8,0.79140658,1.739558489,36,Meets Policy,Limited Policy,2850
+Wyoming,17,43,60925,No,No,No,No,Yes,34,57.7,36,29.9,0.875609503,1.704879483,17,Weak Policy,No Policy,3875
+,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,
+http://hrc.nwlc.org/status-indicators/maternal-mortality-rate-100000,,,,,,,,,,,,,,,,,,
+henry J kaiser family foundation ,,,,,,,,,,,,,,,,,,
+abortioin scale: https://www.washingtonpost.com/news/the-fix/wp/2013/03/07/where-all-50-states-stand-on-abortion-in-two-charts/?utm_term=.cfcd05ee6e50 ,,,,,,,,,,,,,,,,,,

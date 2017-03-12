@@ -1,12 +1,17 @@
 
+import sys 
+sys.path.insert(0, '/Users/minire/dropbox/CS/keys')
+import keys
+print dir(keys)
+
 import plotly.plotly as py
 import plotly.tools as tls
-tls.set_credentials_file(username='minire', api_key='nkch3Fjxld6ZPE70SKpN')
+tls.set_credentials_file(username=keys.pltusername, api_key=keys.pltapi_key)
 import pandas as pd
 import requests
 import json
 import pickle
-import numpy as np
+import numpy as np 
 
 # US. Creating a dataframe for Maternal Mortality Rate (MMR) by US state from CSV file. Data obtained from 
 #http://kff.org/

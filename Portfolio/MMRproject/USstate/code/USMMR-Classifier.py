@@ -86,7 +86,7 @@ feature_cols = [ 'MedianIncome($)', 'Medicaid_extend_Pregnancy', 'economic distr
 X = USMMR[feature_cols]
 y = USMMR['MMRClassifier']
 ​
-In [ ]:
+
 
 # In[ ] :
 # Importing random forest regressor for continuous variable 
@@ -99,9 +99,6 @@ rfreg
 ​
 import numpy as np
 ​
-In [ ]:
-
-5
 # In[ ]:
 # Tuning n-estimators 
 # List of values to try for n_estimators (the number of trees)
@@ -128,7 +125,7 @@ plt.ylabel('ACU')
 ​
 # Show the best ACU score and the corresponding max_features
 sorted(zip(ACU_scores, estimator_range),reverse=True)[0]
-In [ ]:
+
 
 # In[ ]:
 # Tuning max_features
@@ -152,9 +149,6 @@ plt.ylabel('ACU')
 # Show the best ACU score and the corresponding max_features
 sorted(zip(ACU_scores, feature_range), reverse=True)[0]
 ​
-In [ ]:
-
-,
 # In[ ]:
 # Fitting a Random Forest with the best parameters
 # Max_features=1 is best and n_estimators=30
@@ -177,27 +171,26 @@ print(sfm.transform(X).shape[0],sfm.transform(X).shape[1])
 sfm = SelectFromModel(rfreg, threshold='median', prefit=True)
 print(sfm.transform(X).shape[0],sfm.transform(X).shape[1])
 ​
-In [ ]:
+# In[ ]:
 
 ​
 sfm = SelectFromModel(rfreg, threshold=0.1, prefit=True)
 X_important = sfm.transform(X)
 print(X_important.shape[0],X_important.shape[1])
-In [ ]:
+
 
 # Check the Accuracy Score for a Random Forest that only includes important features
 rfreg = RandomForestClassifier(n_estimators=30, max_features=3, random_state=1)
 scores = cross_val_score(rfreg, X_important, y, cv=10, scoring='accuracy')
 np.mean(scores)
 ​
-In [ ]:
+
 
 # check the Accuracy Score for a Random Forest that includes ALL features
 rfreg = RandomForestClassifier(n_estimators=30, max_features=3, random_state=1)
 scores = cross_val_score(rfreg, X, y, cv=10, scoring='accuracy')
 np.mean(scores)
-​
-In [ ]:
+
 
 print 
 # Calculate the Null Accuracy Score 

@@ -2,14 +2,19 @@
 # Learn about API authentication here: https://plot.ly/pandas/getting-started
 # Find your api_key here: https://plot.ly/settings/api
 
+import sys 
+sys.path.insert(0, '/Users/minire/dropbox/CS/keys')
+import keys
+print dir(keys)
+
 import plotly.plotly as py
 import plotly.tools as tls
-tls.set_credentials_file(username='minire', api_key='nkch3Fjxld6ZPE70SKpN')
+tls.set_credentials_file(username=keys.pltusername, api_key=keys.pltapi_key)
 import pandas as pd
 import requests
 import json
 import pickle
-import numpy as np
+import numpy as np 
 
 #reading in the US agricultural exports for 2011
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/2011_us_ag_exports.csv')
