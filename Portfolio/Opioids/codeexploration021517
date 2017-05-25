@@ -1,0 +1,62 @@
+import pandas as pd
+import numpy as np
+
+s = {}
+
+
+   
+z=0
+for i in range (0,10):
+    s=list(np.random.binomial(1, 0.6, 10))
+    print s
+    
+    
+    
+    if s[i] == s[i+1]:
+        z = z
+    if s[i] != s[i+1]:
+        z = z+1 
+    print z    
+
+
+
+
+
+    
+p = []
+   
+for i in range (0,100):
+    p.append(list(np.random.binomial(1, 0.6, 10)))
+    
+print p 
+
+    
+df = pd.DataFrame(data=s)
+df
+
+def extract(x):
+    for col in x:
+        if col['category'] == 'YEAR':
+            return col['code'] 
+    
+MMRfact['MMRYEAR'] = [extract(row) for row in MMRfact['Dim']]
+
+def groups(x):
+    for n in x:
+        print n
+
+df['groups'] = [groups(col) for col in df]
+            
+
+groups = [
+        ]
+
+for i in s: 
+    print s[i]
+        
+# number of groups 
+print 2**10
+#1024 
+
+#Grouping follows pascals triangle
+# strictly more than 6 groupings can happen x number of ways out of 1024 (x = 168+72+18+2)
