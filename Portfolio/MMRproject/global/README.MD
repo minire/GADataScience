@@ -2,8 +2,7 @@
 
 
 * Project paper: jupyter notebook - Project_Documentation_Final
-  * location: https://github.com/minire/GADataScience/blob/master/project/notebooks/Project_Documentation_Final.ipynb
-
+  * location: https://github.com/minire/GADataScience/blob/master/Portfolio/MMRproject/global/notebooks/Project_Documentation_Final.ipynb
 * Presentation slides: Power point - Final Presesntation.pptx
   * location: https://github.com/minire/GADataScience/blob/master/project/Final%20Presentation%20112916.pptx
 
